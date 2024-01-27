@@ -1,6 +1,7 @@
+from __future__ import annotations
+
 import copy
 import re
-import sys
 
 
 directions = {
@@ -27,7 +28,7 @@ def parse_input(file_handle):
     return board,path
 
 
-def star1(problem_input):
+def part1(problem_input):
     board,path = problem_input
     board = copy.deepcopy(board)
     size_r = max(p.imag for p in board)+1
@@ -51,7 +52,7 @@ def star1(problem_input):
     return int(1000*(position.imag+1) + 4*(position.real+1) + directions[heading])
 
 
-def star2(problem_input):
+def part2(problem_input):
     board,path = problem_input
     board = copy.deepcopy(board)
     size_r = max(p.imag for p in board)+1
@@ -113,9 +114,3 @@ def star2(problem_input):
         elif move=='R':
             heading *= 1j
     return int(1000*(position.imag+1) + 4*(position.real+1) + directions[heading])
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

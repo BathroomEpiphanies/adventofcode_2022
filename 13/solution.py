@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 import json
-import sys
 
 
 #class Packet(tuple):
@@ -99,7 +100,7 @@ def parse_input(file_handle):
     return [Packet(json.loads(l)) for l in lines if l]
     
 
-def star1(problem_input):
+def part1(problem_input):
     pairs = list(zip(problem_input[0::2], problem_input[1::2]))
     output = 0
     for i,(a,b) in enumerate(pairs, 1):
@@ -108,7 +109,7 @@ def star1(problem_input):
     return output
 
 
-def star2(problem_input):
+def part2(problem_input):
     divider_1 = Packet([[2]])
     divider_2 = Packet([[6]])
     packets = problem_input + [divider_1, divider_2]
@@ -118,9 +119,3 @@ def star2(problem_input):
     pos1 = packets.index(str(divider_1))+1
     pos2 = packets.index(str(divider_2))+1
     return pos1*pos2
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

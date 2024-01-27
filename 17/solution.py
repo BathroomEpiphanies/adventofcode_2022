@@ -1,6 +1,7 @@
+from __future__ import annotations
+
 import itertools
-import sys
-    
+
 
 def parse_input(file_handle):
     return [-1 if c=='<' else +1 for c in file_handle.readline().strip()]
@@ -34,7 +35,7 @@ def print_stack(stack, piece=set()):
         print('|'+''.join('#' if col+row*1j in stack else '@' if col+row*1j in piece else '.' for col in range(7))+'|')
     print('+-------+')
     return
-              
+
 
 def star(problem_input, total_turns):
     moves = (m for m in itertools.chain.from_iterable(itertools.repeat(problem_input)))
@@ -64,15 +65,9 @@ def star(problem_input, total_turns):
     return round(max(s.imag for s in stack))
 
 
-def star1(problem_input):
+def part1(problem_input):
     return star(problem_input, 2_022)
 
 
-def star2(problem_input):
+def part2(problem_input):
     return star(problem_input, 1_000_000_000_000)
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

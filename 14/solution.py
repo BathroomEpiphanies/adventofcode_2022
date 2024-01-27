@@ -1,7 +1,8 @@
+from __future__ import annotations
+
 import copy
 import itertools
-import sys
-    
+
 
 def print_rock(rocks):
     minx,maxx = int(min(r.real for r in rocks)),int(max(r.real for r in rocks))
@@ -10,7 +11,7 @@ def print_rock(rocks):
     for p,r in rocks.items():
         tmp[int(p.imag-miny+1)][int(p.real-minx+1)] = r
     [print(''.join(t)) for t in tmp]
-    
+
 
 def parse_input(file_handle):
     formations = [[int(a)+int(b)*1j for a,b in [c.split(',') for c in line.strip().split(' -> ')]] for line in file_handle.readlines()]
@@ -24,7 +25,7 @@ def parse_input(file_handle):
                 rocks[p] = '#'
     bottom = int(max(r.imag for r in rocks))
     return rocks,bottom
-    
+
 
 def star(problem_input, has_floor=False):
     rocks,bottom = problem_input
@@ -50,15 +51,9 @@ def star(problem_input, has_floor=False):
     return i
 
 
-def star1(problem_input):
+def part1(problem_input):
     return star(problem_input)
 
 
-def star2(problem_input):
+def part2(problem_input):
     return star(problem_input, has_floor=True)
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

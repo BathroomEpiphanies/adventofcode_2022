@@ -1,4 +1,4 @@
-import sys
+from __future__ import annotations
 
 
 def parse_input(file_handle):
@@ -11,20 +11,14 @@ def parse_input(file_handle):
     return test_input
 
 
-def star1(problem_input):
+def part1(problem_input):
     most = 0
     for elf in problem_input:
         most = max(most, sum(elf))
     return most
 
 
-def star2(problem_input):
+def part2(problem_input):
     elves = [sum(elf) for elf in problem_input]
     elves.sort()
     return sum(elves[-3:])
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

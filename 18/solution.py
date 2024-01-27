@@ -1,6 +1,6 @@
+from __future__ import annotations
+
 import collections
-import numpy as np
-import sys
 
 
 def parse_input(file_handle):
@@ -45,11 +45,11 @@ class Point3D:
         return all(a>=b for a,b in zip(self.point,p1.point)) and all(a<=b for a,b in zip(self.point,p2.point))
 
 
-def star1(points):
+def part1(points):
     return sum(6-sum(n in points for n in point.neighbours()) for point in points)
 
 
-def star2(points):
+def part2(points):
     p1 = -Point3D((1,1,1))+Point3D((min(p.point[0] for p in points),min(p.point[1] for p in points),min(p.point[2] for p in points)))
     p2 = +Point3D((1,1,1))+Point3D((max(p.point[0] for p in points),max(p.point[1] for p in points),max(p.point[2] for p in points)))
     area = 0
@@ -64,9 +64,3 @@ def star2(points):
                 queue.append(n)
                 found.add(n)
     return area
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

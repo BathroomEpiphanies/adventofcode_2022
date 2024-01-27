@@ -1,6 +1,7 @@
+from __future__ import annotations
+
 import operator
 import re
-import sys
 import z3
 
 
@@ -21,7 +22,7 @@ def parse_input(file_handle):
 operators = {'+':operator.add, '-':operator.sub, '*':operator.mul, '/':operator.truediv}
 
 
-def star1(tree):
+def part1(tree):
     solver = z3.Solver()
     variables = {}
     for variable in tree:
@@ -36,7 +37,7 @@ def star1(tree):
     return model[variables['root']].as_long()
 
 
-def star2(tree):
+def part2(tree):
     solver = z3.Solver()
     variables = {'humn':z3.Real('humn')}
     for variable in tree:
@@ -50,9 +51,3 @@ def star2(tree):
     solver.check()
     model = solver.model()
     return model[variables['humn']].as_long()
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

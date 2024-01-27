@@ -100,12 +100,12 @@ def star(blueprints, maxtime):
             
         
 
-def star1(problem_input):
+def part1(problem_input):
     return star(problem_input, 20)
 
 
 if __name__=='__main__':
     import sys
     problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    #print(f'*2: {star2(problem_input)}')
+    print(f'*1: {part1(problem_input)}')
+    #print(f'*2: {part2(problem_input)}')

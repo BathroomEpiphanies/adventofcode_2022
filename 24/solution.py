@@ -1,6 +1,7 @@
+from __future__ import annotations
+
 import collections
 import functools
-import sys
 
 
 gusts = {
@@ -57,7 +58,7 @@ def star(valley, trips=1):
             return advance_valley(get_valley(time-1))
 
     time,start,goal = 0, 0-1j, (valley['maxc']-1)+(valley['maxr'])*1j
-    print_valley(problem_input, start, goal)
+    # print_valley(valley, start, goal)
     for _ in range(trips):
         visited = set()
         queue = collections.deque()
@@ -77,15 +78,9 @@ def star(valley, trips=1):
     return time
 
 
-def star1(problem_input):
+def part1(problem_input):
     return star(problem_input)
 
 
-def star2(problem_input):
+def part2(problem_input):
     return star(problem_input, trips=3)
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

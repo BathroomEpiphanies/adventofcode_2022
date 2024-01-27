@@ -1,8 +1,7 @@
+from __future__ import annotations
+
 import functools
-import numpy as np
-import queue
 import re
-import sys
 
 
 class atuple(tuple):
@@ -43,7 +42,7 @@ class atuple(tuple):
 
 def parse_input(file_handle):
     blueprints = []
-    for line in (l.strip() for l in sys.stdin.readlines()):
+    for line in (l.strip() for l in file_handle.readlines()):
         m = re.match(r'Blueprint [0-9]+: Each ore robot costs ([0-9]+) ore. Each clay robot costs ([0-9]+) ore. Each obsidian robot costs ([0-9]+) ore and ([0-9]+) clay. Each geode robot costs ([0-9]+) ore and ([0-9]+) obsidian.', line)
         n = [int(a) for a in m.groups()]
         #print(m)
@@ -89,13 +88,13 @@ def star(blueprints, maxtime):
     sum_ = 0
     mul_ = 1
     for number,blueprint in enumerate(blueprints, 1):
-        print(blueprint)
+        # print(blueprint)
         #[print(l) for l in zip(*(c for r,c in blueprint))]
         maxcosts = atuple((max(l) for l in zip(*(c for r,c in blueprint))))
-        #print(maxcosts)
+        # print(maxcosts)
         @functools.cache
         def search(time, robots, resources):
-            #print('  '*(maxtime-time), time, robots, resources)
+            # print('  '*(maxtime-time), time, robots, resources)
             if time==1:
                 return 0
             else:
@@ -106,22 +105,15 @@ def star(blueprints, maxtime):
                     (robot[3] or robot[4] or robot*robots<robot*maxcosts) and cost<=resources
                 )
         quality = search(time=maxtime, robots=atuple((1,0,0)), resources=atuple((1,0,0)))
-        print(number, quality)
+        # print(number, quality)
         sum_ += number*quality
         mul_ *= quality
     return sum_,mul_
 
 
-def star1(blueprints):
+def part1(blueprints):
     return star(blueprints, 24)[0]
 
         
-def star2(blueprints):
+def part2(blueprints):
     return star(blueprints, 32)[1]
-
-
-if __name__=='__main__':
-    import sys
-    problem_input = parse_input(sys.stdin)
-    #print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

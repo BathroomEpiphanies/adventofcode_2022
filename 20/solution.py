@@ -1,4 +1,4 @@
-import sys
+from __future__ import annotations
 
 
 def parse_input(file_handle):
@@ -26,15 +26,9 @@ def star(problem_input, key=1, rounds=1):
     return sum(coordinates)
 
 
-def star1(problem_input):
+def part1(problem_input):
     return star(problem_input)
 
 
-def star2(problem_input):
+def part2(problem_input):
     return star(problem_input, key=811589153, rounds=10)
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

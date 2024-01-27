@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import sys
 
 
@@ -48,7 +50,7 @@ def parse_input(file_handle):
     return root
 
 
-def star1(problem_input):
+def part1(problem_input):
     def sum_selected(pwd, total=0):
         if pwd.size<100000:
             total += pwd.size
@@ -59,7 +61,7 @@ def star1(problem_input):
     return total
 
 
-def star2(problem_input):
+def part2(problem_input):
     needed_space = 30_000_000-(70_000_000-problem_input.size)
     def find_smallest(pwd, best=float('inf')):
         for _,child in pwd.children.items():
@@ -69,9 +71,3 @@ def star2(problem_input):
         else:
             return best
     return find_smallest(problem_input)
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

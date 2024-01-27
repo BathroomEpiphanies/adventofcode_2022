@@ -1,10 +1,8 @@
+from __future__ import annotations
+
 import networkx
-import collections
-import itertools
-import pprint
 import re
-import sys
-    
+
 
 def parse_input(file_handle):
     cave = networkx.Graph()
@@ -24,7 +22,7 @@ def parse_input(file_handle):
     return direct_distances,remaining
 
 
-def star1(problem_input):
+def part1(problem_input):
     def search(distances, time, position, valves):
         flow = valves[position]*(time-1)
         maxadd = 0
@@ -37,7 +35,7 @@ def star1(problem_input):
     return search(distances, 31, 'AA', valves)
 
 
-def star2(problem_input):
+def part2(problem_input):
     def search(distances, time1,time2, pos1,pos2, valves):
         flow = valves[pos1]*(time1-1) + valves[pos2]*(time2-1)
         valves = {v:r for v,r in valves.items() if v not in [pos1,pos2]}
@@ -60,9 +58,3 @@ def star2(problem_input):
     distances,valves = problem_input
     valves['AA'] = 0
     return search(distances, *(27,27), *('AA','AA'), valves)
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    #print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 import collections
-import sys
 
 
 def parse_input(file_handle):
@@ -23,7 +24,7 @@ pull = collections.defaultdict(lambda: 0, {
 })
 
 
-def star1(problem_input):
+def part1(problem_input):
     head,tail = 0+0j,0+0j
     visited = collections.defaultdict(lambda: False,  {tail:True})
     for d,l in problem_input:
@@ -34,7 +35,7 @@ def star1(problem_input):
     return len(visited)
 
 
-def star2(problem_input):
+def part2(problem_input):
     knots = [0+0j]*10
     visited = collections.defaultdict(lambda: False,  {knots[9]:True})
     for d,l in problem_input:
@@ -44,9 +45,3 @@ def star2(problem_input):
                 knots[k+1] += pull[knots[k]-knots[k+1]]
             visited[knots[9]] = True
     return len(visited)
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

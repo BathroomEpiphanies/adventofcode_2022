@@ -1,6 +1,7 @@
+from __future__ import annotations
+
 import collections
 import itertools
-import sys
 
 
 def parse_input(file_handle):
@@ -40,14 +41,8 @@ def star(elves, maxturns=None):
     return turn,round((bx-ax+1)*(by-ay+1)-len(elves))
 
 
-def star1(problem_input):
+def part1(problem_input):
     return star(problem_input, maxturns=10)[1]
 
-def star2(problem_input):
+def part2(problem_input):
     return star(problem_input)[0]
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

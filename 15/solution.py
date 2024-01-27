@@ -1,7 +1,7 @@
-import collections
+from __future__ import annotations
+
 import re
-import sys
-    
+
 
 def parse_input(file_handle):
     lines = [l.strip() for l in file_handle.readlines()]
@@ -70,31 +70,25 @@ def coverage(sensors,row):
         if e>=0:
             tmp += (a-e,a+e)
     return tmp
-    
 
-def star1(problem_input):
+
+def part1(problem_input):
     sensors,row,_ = problem_input
     row_coverage = coverage(sensors, row)
     for (_,_,_),(x,y) in sensors:
         if y==row:
             row_coverage = row_coverage-(x,x)
-    print('row_coverage',row_coverage)
+    # print('row_coverage',row_coverage)
     return len(row_coverage)
 
 
-def star2(problem_input):
+def part2(problem_input):
     sensors,row,dimension = problem_input
     for row in range(dimension):
         row_coverage = coverage(sensors, row)
         #print(row, row_coverage)
         if len(row_coverage.intervals)>1:
             answer = row+4_000_000*(row_coverage.intervals[0][1]+1)
-            print(row_coverage)
-            print(answer)
+            #print(row_coverage)
+            #print(answer)
     return answer
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

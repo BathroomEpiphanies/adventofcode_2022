@@ -1,8 +1,9 @@
+from __future__ import annotations
+
 import collections
 import copy
 import itertools
 import re
-import sys
 
 
 def parse_input(file_handle):
@@ -18,7 +19,7 @@ def parse_input(file_handle):
     return stacks,moves
 
 
-def star1(problem_input):
+def part1(problem_input):
     stacks,moves = problem_input
     stacks = copy.deepcopy(stacks)
     for a,b,c in moves:
@@ -29,7 +30,7 @@ def star1(problem_input):
     return ''.join([s.pop() for s in stacks])
 
 
-def star2(problem_input):
+def part2(problem_input):
     stacks,moves = problem_input
     stacks = copy.deepcopy(stacks)
     tmp = collections.deque()
@@ -41,9 +42,3 @@ def star2(problem_input):
         #[print(s) for s in stacks]
         #print()
     return ''.join([s.pop() for s in stacks])
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

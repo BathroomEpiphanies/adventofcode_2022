@@ -1,7 +1,6 @@
-import collections
-import itertools
+from __future__ import annotations
+
 import math
-import sys
 
 
 def parse_input(file_handle):
@@ -27,15 +26,5 @@ def to_snafu(decimal):
     return ''.join(reversed(result))
 
 
-def star1(snafus):
+def part1(snafus):
     return to_snafu(sum(sum(values[d]*pow(5,i) for i,d in enumerate(reversed(snafu))) for snafu in snafus))
-
-
-def star2(problem_input):
-    return None
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

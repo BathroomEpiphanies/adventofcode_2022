@@ -1,6 +1,7 @@
+from __future__ import annotations
+
 import more_itertools
 import string
-import sys
 
 
 def parse_input(file_handle):
@@ -10,7 +11,7 @@ def parse_input(file_handle):
 priorities = {a:i for i,a in enumerate(string.ascii_lowercase+string.ascii_uppercase, 1)}
 
 
-def star1(problem_input):
+def part1(problem_input):
     #return sum(priorities[next(iter(set(line[:len(line)//2]) & set(line[len(line)//2:])))] for line in problem_input)
     total = 0
     for line in problem_input:
@@ -19,15 +20,9 @@ def star1(problem_input):
     return total
 
 
-def star2(problem_input):
+def part2(problem_input):
     total = 0
     for l1,l2,l3 in more_itertools.grouper(3, problem_input):
         intersection = set(l1) & set(l2) & set(l3)
         total += priorities[list(intersection)[0]]
     return total
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

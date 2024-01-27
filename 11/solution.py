@@ -1,13 +1,14 @@
+from __future__ import annotations
+
 import collections
 import dataclasses
 import math
-import sys
 import typing
 
 
 @dataclasses.dataclass
 class Monkey:
-    items: collections.deque = collections.deque()
+    items: collections.deque = dataclasses.field(default_factory=collections.deque())
     modulus: int = 0
     operation: typing.Callable = lambda x: x
     toss: typing.Callable = lambda x: None
@@ -52,15 +53,9 @@ def star(monkeys, rounds, divisor):
     return inspections[0]*inspections[1]
 
 
-def star1(monkeys):
+def part1(monkeys):
     return star(monkeys, rounds=20, divisor=3)
 
 
-def star2(monkeys):
+def part2(monkeys):
     return star(monkeys, rounds=10000, divisor=1)
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

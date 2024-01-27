@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 import networkx
-import sys
 
 
 def parse_input(file_handle):
@@ -34,20 +35,14 @@ def parse_input(file_handle):
     return hills,start,end
 
 
-def star1(problem_input):
+def part1(problem_input):
     hills,start,end = problem_input
     return networkx.shortest_path_length(hills,start,end)
 
 
-def star2(problem_input):
+def part2(problem_input):
     hills,start,end = problem_input
     paths = dict(networkx.single_target_shortest_path_length(hills, end))
     starts = [a for a,b in hills.nodes(data=True) if b['height']==ord('a')]
     all_paths = [paths[a] for a in starts if a in paths]
     return min(all_paths)
-
-
-if __name__=='__main__':
-    problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    print(f'*2: {star2(problem_input)}')

@@ -58,7 +58,7 @@ def parse_input(file_handle):
     return blueprints
 
 
-def star1(blueprints):
+def part1(blueprints):
     total = 0
     for number,blueprint in enumerate(blueprints, 1):
         print(blueprint)
@@ -84,7 +84,7 @@ def star1(blueprints):
     return total
 
         
-def star2(blueprints):
+def part2(blueprints):
     total = 1
     for number,blueprint in enumerate(blueprints[0:3], 1):
         print(blueprint)
@@ -109,5 +109,5 @@ def star2(blueprints):
 if __name__=='__main__':
     import sys
     problem_input = parse_input(sys.stdin)
-    print(f'*1: {star1(problem_input)}')
-    #print(f'*2: {star2(problem_input)}')
+    print(f'*1: {part1(problem_input)}')
+    #print(f'*2: {part2(problem_input)}')
